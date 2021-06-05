@@ -1,9 +1,13 @@
+* {
+  box-sizing: border-box;
+}
+
 .app {
   display: flex;
   align-items: stretch;
   flex-direction: column;
   text-align: center;
-  margin: auto;
+  padding: 10px;
 }
 
 @media(orientation: landscape) {
@@ -12,22 +16,17 @@
   }
 }
 
-.header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1 {
+  margin: 0 0 20px 0;
 }
 
 .action {
   border: 1px solid black;
   border-radius: 10px;
-  width: 90%;
   margin: 10px auto;
   padding: 10px;
   cursor: pointer;
+  width: 100%;
 }
 
 .action:hover {
