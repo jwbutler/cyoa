@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import { importRooms } from './Rooms';
 
-function App() {
+const roomsById = importRooms();
+const STARTING_ROOM_ID = 'outside_front_door';
+
+const App = () => {
+  const [roomId, setRoomId] = useState(STARTING_ROOM_ID);
+  const room = roomsById[roomId];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <h1>{room.name}</h1>
+      <div className="description">
+        {room.description}
+      </div>
+      {room.actions.map(action => (
+        <div
+          key={action.ref}
+          className="action"
+          onClick={() => action.ref && setRoomId(action.ref)}>
+          {action.text}
+        </div>
+      ))}
     </div>
   );
 }
