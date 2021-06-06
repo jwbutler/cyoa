@@ -25,15 +25,12 @@ const importRooms: () => { [name: string]: Room } = () => {
 
 const _validateRoom = (room: any): Room => {
   _checkState(typeof room === 'object' && !Array.isArray(room), room);
-  _checkState(room.hasOwnProperty('id'), room);
-  _checkState(typeof room.id === 'string', room);
-  _checkState(room.hasOwnProperty('name'), room);
-  _checkState(typeof room.name === 'string', room);
+  _checkState(room.hasOwnProperty('id') && typeof room.id === 'string', room);
+  _checkState(room.hasOwnProperty('name') && typeof room.name === 'string', room);
   if (room.hasOwnProperty('description')) {
     _checkState(typeof room.description === 'string', room);
   }
-  _checkState(room.hasOwnProperty('actions'), room);
-  _checkState(Array.isArray(room.actions), room);
+  _checkState(room.hasOwnProperty('actions') && Array.isArray(room.actions), room);
   const actions = room.actions.map((action: any) => _validateAction(action));
 
   return {
@@ -43,14 +40,16 @@ const _validateRoom = (room: any): Room => {
 };
 
 const _validateAction = (action: any): Action => {
-  _checkState(action.hasOwnProperty('text'), action);
-  _checkState(typeof action.text === 'string', action);
+  _checkState(action.hasOwnProperty('text') && typeof action.text === 'string', action);
   if (action.hasOwnProperty('ref')) {
     _checkState(typeof action.ref === 'string', action);
   }
   return action as Action;
 };
 
+/**
+ * Validate that all references to room ids are valid
+ */
 const _validateRefIntegrity = (rooms: { [id: string]: Room }) => {
   Object.values(rooms).forEach(room => {
     room.actions.forEach(action => {
@@ -61,6 +60,9 @@ const _validateRefIntegrity = (rooms: { [id: string]: Room }) => {
   });
 }
 
+/**
+ * @param obj The contents of the object being checked, for logging purposes
+ */
 const _checkState = (condition: boolean, obj: any): void => {
   if (!condition) {
     throw new Error("Invalid definition: " + JSON.stringify(obj));

@@ -181,6 +181,10 @@
       {
         "text": "Go to the dining room",
         "ref": "dining_room"
+      },
+      {
+        "text": "Go to the front hall",
+        "ref": "front_hall"
       }
     ]
   },

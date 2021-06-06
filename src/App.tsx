@@ -19,7 +19,12 @@ const App = () => {
         <div
           key={action.ref}
           className="action"
-          onClick={() => action.ref && setRoomId(action.ref)}>
+          onClick={() => {
+            if (action.ref) {
+              setRoomId(action.ref);
+            }
+          }}
+        >
           {action.text}
         </div>
       ))}
