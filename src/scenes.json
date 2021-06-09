@@ -167,6 +167,13 @@
         "adds": {
           "items": ["shed_key"]
         }
+      },
+      {
+        "text": "Check the counter drawer",
+        "scene": "kitchen_counter_drawer_without_key",
+        "requires": {
+          "items": ["shed_key"]
+        }
       }
     ]
   },
@@ -174,6 +181,17 @@
     "id": "kitchen_counter_drawer",
     "name": "Drawer",
     "description": "There's a bunch of junk in here.  You also find a key!  You take the key.",
+    "actions": [
+      {
+        "text": "Back",
+        "scene": "kitchen"
+      }
+    ]
+  },
+  {
+    "id": "kitchen_counter_drawer_without_key",
+    "name": "Drawer",
+    "description": "There's nothing in here but junk.",
     "actions": [
       {
         "text": "Back",
