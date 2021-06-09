@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import './App.css';
 import { Action, importScenes } from './Scenes';
 import Menu from './Menu';
 import ActionButton from './ActionButton';
+import './App.css';
 
 const scenesById = importScenes();
 const STARTING_SCENE_ID = 'outside_front_door';
