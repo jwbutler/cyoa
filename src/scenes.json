@@ -6,15 +6,25 @@
     "actions": [
       {
         "text": "Go back inside",
-        "ref": "dining_room"
+        "scene": "dining_room"
       },
       {
         "text": "Go in the shed",
-        "ref": "shed"
+        "scene": "shed_locked",
+        "forbids": {
+          "items": ["shed_key"]
+        }
+      },
+      {
+        "text": "Go in the shed",
+        "scene": "shed_inside",
+        "requires": {
+          "items": ["shed_key"]
+        }
       },
       {
         "text": "Go to the driveway",
-        "ref": "driveway"
+        "scene": "driveway"
       }
     ]
   },
@@ -25,15 +35,15 @@
     "actions": [
       {
         "text": "Go to the dining room",
-        "ref": "dining_room"
+        "scene": "dining_room"
       },
       {
         "text": "Go to the living room",
-        "ref": "living_room"
+        "scene": "living_room"
       },
       {
         "text": "Go to the family room",
-        "ref": "family_room"
+        "scene": "family_room"
       }
     ]
   },
@@ -44,19 +54,19 @@
     "actions": [
       {
         "text": "Go to the main hall",
-        "ref": "main_hall"
+        "scene": "main_hall"
       },
       {
         "text": "Go to the kitchen",
-        "ref": "kitchen"
+        "scene": "kitchen"
       },
       {
         "text": "Go to the den",
-        "ref": "den"
+        "scene": "den"
       },
       {
         "text": "Go outside",
-        "ref": "backyard"
+        "scene": "backyard"
       }
     ]
   },
@@ -67,7 +77,7 @@
     "actions": [
       {
         "text": "Exit",
-        "ref": "front_hall"
+        "scene": "front_hall"
       }
     ]
   },
@@ -78,15 +88,15 @@
     "actions": [
       {
         "text": "Go to the kitchen",
-        "ref": "kitchen"
+        "scene": "kitchen"
       },
       {
         "text": "Go in the garage",
-        "ref": "garage"
+        "scene": "garage"
       },
       {
         "text": "Go to the backyard",
-        "ref": "backyard"
+        "scene": "backyard"
       }
     ]
   },
@@ -97,7 +107,7 @@
     "actions": [
       {
         "text": "Go to the den",
-        "ref": "den"
+        "scene": "den"
       }
     ]
   },
@@ -108,15 +118,15 @@
     "actions": [
       {
         "text": "Go outside",
-        "ref": "outside_front_door"
+        "scene": "outside_front_door"
       },
       {
         "text": "Go into the bathroom",
-        "ref": "downstairs_bathroom"
+        "scene": "downstairs_bathroom"
       },
       {
         "text": "Go further inside",
-        "ref": "main_hall"
+        "scene": "main_hall"
       }
     ]
   },
@@ -127,7 +137,7 @@
     "actions": [
       {
         "text": "Go outside",
-        "ref": "driveway"
+        "scene": "driveway"
       }
     ]
   },
@@ -138,15 +148,54 @@
     "actions": [
       {
         "text": "Go outside",
-        "ref": "driveway"
+        "scene": "driveway"
       },
       {
         "text": "Go to the main hall",
-        "ref": "main_hall"
+        "scene": "main_hall"
       },
       {
         "text": "Go to the dining room",
-        "ref": "dining_room"
+        "scene": "dining_room"
+      },
+      {
+        "text": "Check the counter drawer",
+        "scene": "kitchen_counter_drawer",
+        "forbids": {
+          "items": ["shed_key"]
+        },
+        "adds": {
+          "items": ["shed_key"]
+        }
+      },
+      {
+        "text": "Check the counter drawer",
+        "scene": "kitchen_counter_drawer_without_key",
+        "requires": {
+          "items": ["shed_key"]
+        }
+      }
+    ]
+  },
+  {
+    "id": "kitchen_counter_drawer",
+    "name": "Drawer",
+    "description": "There's a bunch of junk in here.  You also find a key!  You take the key.",
+    "actions": [
+      {
+        "text": "Back",
+        "scene": "kitchen"
+      }
+    ]
+  },
+  {
+    "id": "kitchen_counter_drawer_without_key",
+    "name": "Drawer",
+    "description": "There's nothing in here but junk.",
+    "actions": [
+      {
+        "text": "Back",
+        "scene": "kitchen"
       }
     ]
   },
@@ -157,11 +206,11 @@
     "actions": [
       {
         "text": "Go to the den",
-        "ref": "den"
+        "scene": "den"
       },
       {
         "text": "Go to the main hall",
-        "ref": "main_hall"
+        "scene": "main_hall"
       }
     ]
   },
@@ -172,19 +221,19 @@
     "actions": [
       {
         "text": "Go to the kitchen",
-        "ref": "kitchen"
+        "scene": "kitchen"
       },
       {
         "text": "Go to the living room",
-        "ref": "living_room"
+        "scene": "living_room"
       },
       {
         "text": "Go to the dining room",
-        "ref": "dining_room"
+        "scene": "dining_room"
       },
       {
         "text": "Go to the front hall",
-        "ref": "front_hall"
+        "scene": "front_hall"
       }
     ]
   },
@@ -195,18 +244,29 @@
     "actions": [
       {
         "text": "Go inside",
-        "ref": "front_hall"
+        "scene": "front_hall"
       }
     ]
   },
   {
-    "id": "shed",
+    "id": "shed_inside",
     "name": "Shed",
     "description": "You're in the shed.  It's stuffed with assorted outdoor toys, such as frisbees and various types of ball.",
     "actions": [
       {
         "text": "Go outside",
-        "ref": "backyard"
+        "scene": "backyard"
+      }
+    ]
+  },
+  {
+    "id": "shed_locked",
+    "name": "Shed",
+    "description": "It's locked.  Maybe there's a key somewhere...",
+    "actions": [
+      {
+        "text": "Back",
+        "scene": "backyard"
       }
     ]
   }

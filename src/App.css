@@ -1,34 +1,3 @@
 * {
   box-sizing: border-box;
 }
-
-.app {
-  display: flex;
-  align-items: stretch;
-  flex-direction: column;
-  text-align: center;
-  padding: 10px;
-}
-
-@media(orientation: landscape) {
-  .app {
-    width: 50vw;
-  }
-}
-
-h1 {
-  margin: 0 0 20px 0;
-}
-
-.action {
-  border: 1px solid black;
-  border-radius: 10px;
-  margin: 10px auto;
-  padding: 10px;
-  cursor: pointer;
-  width: 100%;
-}
-
-.action:hover {
-  color: blue;
-}
