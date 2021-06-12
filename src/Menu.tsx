@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import React, { createRef, ReactElement, RefObject, useEffect } from 'react';
 import ActionButton from './ActionButton';
 import './Menu.css';
 
@@ -8,14 +8,21 @@ type Props = {
   children: ReactElement<typeof ActionButton>[]
 }
 
-const Menu = ({ title, description, children }: Props) => (
-  <div className="menu">
-    <h1>{title}</h1>
-    <div className="description">
-      {description}
+const Menu = ({ title, description, children }: Props) => {
+  const ref: RefObject<any> = createRef();
+  useEffect(() => {
+    ref.current.scrollTo(0, 0);
+  });
+
+  return (
+    <div className="menu" ref={ref}>
+      <h1>{title}</h1>
+      <p className="description">
+        {description}
+      </p>
+      {children}
     </div>
-    {children}
-  </div>
-);
+  );
+};
 
 export default Menu;

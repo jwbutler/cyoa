@@ -1,5 +1,6 @@
 import React, { ReactElement } from 'react';
 import './ActionButton.css';
+import Button from './Button';
 
 type Props = {
   text: string,
@@ -7,13 +8,13 @@ type Props = {
 };
 
 const ActionButton = ({ text, onClick }: Props): ReactElement<Props> =>  (
-  <div
+  <Button
+    type={'WHITE'}
     key={text}
-    className="action"
     onClick={onClick}
   >
     {text}
-  </div>
+  </Button>
 );
 
 export default ActionButton;
