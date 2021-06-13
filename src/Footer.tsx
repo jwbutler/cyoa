@@ -11,7 +11,10 @@ type Props = {
 
 const Footer = ({ controller }: Props) => {
   const loadPrompt = () => {
-    if (gameStateEquals(controller.currentState, controller.savedGame)) {
+    if (
+      gameStateEquals(controller.currentState, controller.savedGame)
+      || gameStateEquals(controller.currentState, controller.initialState)
+    ) {
       load();
     } else {
       controller.setLightbox(
@@ -80,15 +83,15 @@ const Footer = ({ controller }: Props) => {
   const save = () => {
     controller.save();
     controller.setLightbox(
-      <Lightbox title="Game saved" x={false} handleClose={() => controller.setLightbox(null)} />
+      <Lightbox
+        title="Game saved"
+        x={false}
+        handleClose={() => controller.setLightbox(null)}
+      />
     );
   };
 
   const restartPrompt = () => {
-    if (gameStateEquals(controller.currentState, controller.initialState)) {
-      return;
-    }
-
     controller.setLightbox(
       <Lightbox
         title="Are you sure?"
@@ -98,8 +101,6 @@ const Footer = ({ controller }: Props) => {
         handleClose = {(confirm) => {
           if (confirm) {
             controller.restart();
-          } else {
-            controller.setLightbox(null);
           }
           controller.setLightbox(null);
         }}
