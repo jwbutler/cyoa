@@ -1,7 +1,12 @@
 import React, { useState } from 'react';
-import { Action, importScenes } from './Scenes';
+import Button from './Button';
+import Footer from './Footer';
 import Menu from './Menu';
-import ActionButton from './ActionButton';
+import LoadButton from './LoadButton';
+import NewGameButton from './NewGameButton';
+import SaveButton from './SaveButton';
+import { Action, importScenes } from './Scenes';
+import { GameState } from './GameState';
 import './App.css';
 
 const scenesById = importScenes();
@@ -9,8 +14,9 @@ const STARTING_SCENE_ID = 'outside_front_door';
 
 const App = () => {
   const [sceneId, setSceneId] = useState(STARTING_SCENE_ID);
-  const room = scenesById[sceneId];
+  const scene = scenesById[sceneId];
   const [inventory, setInventory] = useState([] as string[]);
+  const state: GameState = { sceneId, inventory };
 
   const isActionVisible = (action: Action) => {
     if (action.requires) {
@@ -51,19 +57,42 @@ const App = () => {
     }
   };
 
+  const load = ({ sceneId, inventory }: GameState) => {
+    setSceneId(sceneId);
+    setInventory(inventory);
+  }
+
+  const restart = () => {
+    setSceneId(STARTING_SCENE_ID);
+    setInventory([]);
+  };
+
   return (
-    <Menu
-      title={room.name}
-      description={room.description}
-    >
-      {
-        room.actions
-          .filter(action => isActionVisible(action))
-          .map(action => (
-            <ActionButton text={action.text} onClick={() => actionClick(action)} />
-          ))
-      }
-    </Menu>
+    <div className="app">
+      <Menu
+        title={scene.name}
+        description={scene.description}
+      >
+        {
+          scene.actions
+            .filter(action => isActionVisible(action))
+            .map(action => (
+              <Button
+                type="white"
+                size="medium"
+                onClick={() => actionClick(action)}
+              >
+                {action.text}
+              </Button>
+            ))
+        }
+      </Menu>
+      <Footer>
+        <NewGameButton handleRestart={restart} />
+        <SaveButton state={state} />
+        <LoadButton handleLoad={load} />
+      </Footer>
+    </div>
   );
 }
 
