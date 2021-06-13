@@ -44,3 +44,11 @@
 .lightbox-title {
   margin-top: 0;
 }
+
+.lightbox > *:not(:first-child) {
+  margin-top: 10px;
+}
+
+.lightbox > *:not(:last-child) {
+  margin-bottom: 10px;
+}

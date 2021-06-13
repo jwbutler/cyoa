@@ -22,7 +22,7 @@ const App = ({ scenes, initialState }: Props) => {
   const [inventory, setInventory] = useState(initialState.inventory);
   const [lightbox, setLightbox] = useState(null as (ReactElement | null));
   const [savedGame, setSavedGame] = useState(loadSavedGame());
-  const controller = new Controller({
+  const controller: Controller = Controller.create({
     initialState,
     sceneId, setSceneId,
     inventory, setInventory,

@@ -14,11 +14,14 @@ const serialize = (state: GameState) => btoa(JSON.stringify(state));
  */
 const deserialize = (value: string) => JSON.parse(atob(value)) as GameState;
 
+const equals = (first: GameState | null, second: GameState | null) => JSON.stringify(first) === JSON.stringify(second);
+
 export type {
   GameState
 };
 
 export {
   deserialize,
-  serialize
+  serialize,
+  equals
 }
