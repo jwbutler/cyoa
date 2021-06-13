@@ -1,4 +1,7 @@
 import { GameState } from './GameState';
+import { ReactElement } from 'react';
+import { Consumer } from './types';
+import { save as saveFile } from './saveFile';
 
 /**
  * Core state management class which encapsulates the result of various {@link React#useState} hooks.
@@ -9,23 +12,41 @@ interface Props {
   readonly initialState: GameState,
   readonly sceneId: string,
   readonly inventory: string[],
-  readonly setSceneId: (sceneId: string) => void,
-  readonly setInventory: (inventory: string[]) => void
+  readonly setSceneId: Consumer<string>,
+  readonly setInventory: Consumer<string[]>,
+  readonly lightbox: ReactElement | null,
+  readonly setLightbox: Consumer<ReactElement | null>,
+  readonly savedGame: GameState | null,
+  readonly setSavedGame: Consumer<GameState | null>,
 }
 
 class Controller implements Props {
   readonly initialState: GameState;
   readonly sceneId: string;
   readonly inventory: string[];
-  readonly setSceneId: (sceneId: string) => void;
-  readonly setInventory: (inventory: string[]) => void;
+  readonly setSceneId: Consumer<string>;
+  readonly setInventory: Consumer<string[]>;
+  readonly lightbox: ReactElement | null;
+  readonly setLightbox: Consumer<ReactElement | null>;
+  readonly savedGame: GameState | null;
+  readonly setSavedGame: Consumer<GameState | null>;
 
-  constructor({ initialState, sceneId, inventory, setSceneId, setInventory }: Props) {
+  constructor({
+    initialState,
+    sceneId, setSceneId,
+    inventory, setInventory,
+    lightbox, setLightbox,
+    savedGame, setSavedGame
+  }: Props) {
     this.initialState = initialState;
     this.sceneId = sceneId;
-    this.inventory = inventory;
     this.setSceneId = setSceneId;
+    this.inventory = inventory;
     this.setInventory = setInventory;
+    this.lightbox = lightbox;
+    this.setLightbox = setLightbox;
+    this.savedGame = savedGame;
+    this.setSavedGame = setSavedGame;
   }
 
   load({ sceneId, inventory }: GameState) {
@@ -35,6 +56,12 @@ class Controller implements Props {
 
   restart() {
     this.load(this.initialState);
+  }
+
+  save() {
+    const { sceneId, inventory, setSavedGame } = this;
+    saveFile({ sceneId, inventory });
+    setSavedGame({ sceneId, inventory });
   }
 }
 

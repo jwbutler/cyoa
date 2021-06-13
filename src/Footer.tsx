@@ -1,12 +1,7 @@
 import Button from './Button';
 import Controller from './Controller';
+import Lightbox from './Lightbox';
 import React from 'react';
-import { GameState } from './GameState';
-import {
-  exists as saveFileExists,
-  load as loadSaveFile,
-  save as saveFile,
-} from './saveFile';
 import './Footer.css';
 
 type Props = {
@@ -15,15 +10,19 @@ type Props = {
 
 const Footer = ({ controller }: Props) => {
   const load = () => {
-    const state = loadSaveFile();
-    if (state) {
-      controller.load(state);
+    if (controller.savedGame) {
+      controller.load(controller.savedGame);
+      controller.setLightbox(
+        <Lightbox title="Game loaded" x={false} handleClose={() => controller.setLightbox(null)} />
+      );
     }
   };
 
   const save = () => {
-    const { sceneId, inventory }: GameState = controller;
-    saveFile({ sceneId, inventory });
+    controller.save();
+    controller.setLightbox(
+      <Lightbox title="Game saved" x={false} handleClose={() => controller.setLightbox(null)} />
+    );
   };
 
   const restart = () => controller.restart();
@@ -48,7 +47,7 @@ const Footer = ({ controller }: Props) => {
         type="white"
         size="small"
         onClick={load}
-        disabled={!saveFileExists()}
+        disabled={!controller.savedGame}
       >
         Load
       </Button>
