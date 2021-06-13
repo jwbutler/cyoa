@@ -4,7 +4,7 @@ import Controller from './Controller';
 import Footer from './Footer';
 import Menu from './Menu';
 import { GameState } from './GameState';
-import type { Scene } from './Scenes';
+import type { Scene } from './types';
 import './App.css';
 
 type Props = {
