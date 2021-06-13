@@ -12,6 +12,10 @@ type Props = {
   initialState: GameState
 }
 
+/**
+ * Entry point for the game engine.  There should be no game-specific logic from this point on; all behavior
+ * is driven by the data passed as props.
+ */
 const App = ({ scenes, initialState }: Props) => {
   const [sceneId, setSceneId] = useState(initialState.sceneId);
   const [inventory, setInventory] = useState(initialState.inventory);
