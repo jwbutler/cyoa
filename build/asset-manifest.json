@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.css": "/cyoa/static/css/main.634d44b8.chunk.css",
-    "main.js": "/cyoa/static/js/main.815ceb58.chunk.js",
-    "main.js.map": "/cyoa/static/js/main.815ceb58.chunk.js.map",
+    "main.css": "/cyoa/static/css/main.87c3fbf4.chunk.css",
+    "main.js": "/cyoa/static/js/main.eea74873.chunk.js",
+    "main.js.map": "/cyoa/static/js/main.eea74873.chunk.js.map",
     "runtime-main.js": "/cyoa/static/js/runtime-main.008ba165.js",
     "runtime-main.js.map": "/cyoa/static/js/runtime-main.008ba165.js.map",
-    "static/js/2.3785e137.chunk.js": "/cyoa/static/js/2.3785e137.chunk.js",
-    "static/js/2.3785e137.chunk.js.map": "/cyoa/static/js/2.3785e137.chunk.js.map",
+    "static/js/2.77fa9a50.chunk.js": "/cyoa/static/js/2.77fa9a50.chunk.js",
+    "static/js/2.77fa9a50.chunk.js.map": "/cyoa/static/js/2.77fa9a50.chunk.js.map",
     "index.html": "/cyoa/index.html",
-    "static/css/main.634d44b8.chunk.css.map": "/cyoa/static/css/main.634d44b8.chunk.css.map",
-    "static/js/2.3785e137.chunk.js.LICENSE.txt": "/cyoa/static/js/2.3785e137.chunk.js.LICENSE.txt"
+    "static/css/main.87c3fbf4.chunk.css.map": "/cyoa/static/css/main.87c3fbf4.chunk.css.map",
+    "static/js/2.77fa9a50.chunk.js.LICENSE.txt": "/cyoa/static/js/2.77fa9a50.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.008ba165.js",
-    "static/js/2.3785e137.chunk.js",
-    "static/css/main.634d44b8.chunk.css",
-    "static/js/main.815ceb58.chunk.js"
+    "static/js/2.77fa9a50.chunk.js",
+    "static/css/main.87c3fbf4.chunk.css",
+    "static/js/main.eea74873.chunk.js"
   ]
 }
