@@ -22,10 +22,10 @@ const save = (state: GameState) => {
   window.localStorage.setItem('save', serialize(state));
 }
 
-const saveFileExists = () => !!localStorage.getItem('save');
+const exists = () => !!localStorage.getItem('save');
 
 export {
   load,
   save,
-  saveFileExists
+  exists
 };

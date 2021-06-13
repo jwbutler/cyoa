@@ -1,71 +1,26 @@
 import React, { useState } from 'react';
-import Button from './Button';
+import ActionButton from './ActionButton';
+import Controller from './Controller';
 import Footer from './Footer';
 import Menu from './Menu';
-import LoadButton from './LoadButton';
-import NewGameButton from './NewGameButton';
-import SaveButton from './SaveButton';
-import { Action, importScenes } from './Scenes';
 import { GameState } from './GameState';
+import type { Scene } from './Scenes';
 import './App.css';
 
-const scenesById = importScenes();
-const STARTING_SCENE_ID = 'outside_front_door';
+type Props = {
+  scenes: { [name: string]: Scene },
+  initialState: GameState
+}
 
-const App = () => {
-  const [sceneId, setSceneId] = useState(STARTING_SCENE_ID);
-  const scene = scenesById[sceneId];
-  const [inventory, setInventory] = useState([] as string[]);
-  const state: GameState = { sceneId, inventory };
-
-  const isActionVisible = (action: Action) => {
-    if (action.requires) {
-      if (action.requires.items) {
-        if (!action.requires.items.every(item => inventory.includes(item))) {
-          return false;
-        }
-      }
-    }
-    if (action.forbids) {
-      if (action.forbids.items) {
-        if (action.forbids.items.find(item => inventory.includes(item))) {
-          return false;
-        }
-      }
-    }
-    return true;
-  }
-
-  const actionClick = (action: Action) => {
-    if (action.scene) {
-      setSceneId(action.scene);
-    }
-    if (action.adds) {
-      if (action.adds.items) {
-        // TODO: add distinct().  Doesn't matter since remove() will remove the duplicates
-        const updatedInventory = [...inventory, ...action.adds.items]
-        setInventory(updatedInventory);
-      }
-    }
-    if (action.removes) {
-      if (action.removes.items) {
-        // TODO: add distinct()
-        const { items } = action.removes;
-        const updatedInventory = inventory.filter(item => items && !items.includes(item));
-        setInventory(updatedInventory);
-      }
-    }
-  };
-
-  const load = ({ sceneId, inventory }: GameState) => {
-    setSceneId(sceneId);
-    setInventory(inventory);
-  }
-
-  const restart = () => {
-    setSceneId(STARTING_SCENE_ID);
-    setInventory([]);
-  };
+/**
+ * Entry point for the game engine.  There should be no game-specific logic from this point on; all behavior
+ * is driven by the data passed as props.
+ */
+const App = ({ scenes, initialState }: Props) => {
+  const [sceneId, setSceneId] = useState(initialState.sceneId);
+  const [inventory, setInventory] = useState(initialState.inventory);
+  const controller = new Controller({ initialState, sceneId, setSceneId, inventory, setInventory });
+  const scene = scenes[sceneId];
 
   return (
     <div className="app">
@@ -73,25 +28,15 @@ const App = () => {
         title={scene.name}
         description={scene.description}
       >
-        {
-          scene.actions
-            .filter(action => isActionVisible(action))
-            .map(action => (
-              <Button
-                type="white"
-                size="medium"
-                onClick={() => actionClick(action)}
-              >
-                {action.text}
-              </Button>
-            ))
-        }
+        {scene.actions.map((action, index) => (
+          <ActionButton
+            action={action}
+            controller={controller}
+            key={`${action.text}_${index}`}
+          />
+        ))}
       </Menu>
-      <Footer>
-        <NewGameButton handleRestart={restart} />
-        <SaveButton state={state} />
-        <LoadButton handleLoad={load} />
-      </Footer>
+      <Footer controller={controller} />
     </div>
   );
 }
