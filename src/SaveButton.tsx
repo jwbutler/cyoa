@@ -14,7 +14,8 @@ const SaveButton = ({ state }: Props) => {
 
   return (
     <Button
-      type={'WHITE'}
+      type="white"
+      size="small"
       onClick={onClick}
     >
       Save

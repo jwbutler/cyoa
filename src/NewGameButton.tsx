@@ -7,7 +7,8 @@ type Props = {
 
 const NewGameButton = ({ handleRestart }: Props) => (
   <Button
-    type={'WHITE'}
+    type="white"
+    size="small"
     onClick={handleRestart}
   >
     New

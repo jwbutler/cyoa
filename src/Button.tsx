@@ -1,18 +1,27 @@
 import React, { ReactNode } from 'react';
 import './Button.css';
 
-type ButtonType = 'WHITE' | 'AQUA';
+type ButtonType = 'white';
+type ButtonSize = 'small' | 'medium';
 
 type Props = {
-  type: ButtonType,
+  type?: ButtonType,
+  size?: ButtonSize,
   classNames?: string[],
   onClick?: () => void,
   disabled?: boolean,
   children: ReactNode
 };
 
-const Button = ({ type, classNames, onClick, children, ...rest }: Props) => {
-  const className = ['button', type.toLowerCase(), ...(classNames || [])].join(' ');
+const Button = ({
+  type = 'white',
+  size = 'medium',
+  classNames = [],
+  onClick,
+  children,
+  ...rest
+}: Props) => {
+  const className = ['button', type, size, ...classNames].join(' ');
   return (
     <button
       className={className}

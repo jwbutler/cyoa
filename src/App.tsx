@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import ActionButton from './ActionButton';
+import Button from './Button';
 import Footer from './Footer';
 import Menu from './Menu';
 import LoadButton from './LoadButton';
+import NewGameButton from './NewGameButton';
 import SaveButton from './SaveButton';
 import { Action, importScenes } from './Scenes';
 import { GameState } from './GameState';
 import './App.css';
-import NewGameButton from './NewGameButton';
 
 const scenesById = importScenes();
 const STARTING_SCENE_ID = 'outside_front_door';
@@ -77,7 +77,13 @@ const App = () => {
           scene.actions
             .filter(action => isActionVisible(action))
             .map(action => (
-              <ActionButton text={action.text} onClick={() => actionClick(action)} />
+              <Button
+                type="white"
+                size="medium"
+                onClick={() => actionClick(action)}
+              >
+                {action.text}
+              </Button>
             ))
         }
       </Menu>

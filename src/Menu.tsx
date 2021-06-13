@@ -1,11 +1,10 @@
-import React, { createRef, ReactElement, RefObject, useEffect } from 'react';
-import ActionButton from './ActionButton';
+import React, { createRef, ReactNode, RefObject, useEffect } from 'react';
 import './Menu.css';
 
 type Props = {
   title: string,
   description?: string,
-  children: ReactElement<typeof ActionButton>[]
+  children: ReactNode
 }
 
 const Menu = ({ title, description, children }: Props) => {

@@ -2,8 +2,11 @@
   display: flex;
   align-items: stretch;
   flex-direction: column;
+  margin: 0 auto;
+  max-width: 600px;
   overflow: auto;
-  padding: 10px 30px;
+  padding: 10px 20px;
+  text-align: center;
 }
 
 .menu > *:not(:first-child) {
@@ -16,5 +19,4 @@
 
 .menu h1 {
   margin-top: 0;
-  text-align: center;
 }

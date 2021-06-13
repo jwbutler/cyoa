@@ -16,7 +16,9 @@ const LoadButton = ({ handleLoad }: Props) => {
   };
 
   return (
-    <Button type={'WHITE'}
+    <Button
+      type="white"
+      size="small"
       disabled={!saveFileExists()}
       onClick={onClick}
     >
