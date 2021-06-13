@@ -7,21 +7,23 @@ type ButtonSize = 'small' | 'medium';
 type Props = {
   type?: ButtonType,
   size?: ButtonSize,
-  classNames?: string[],
   onClick?: () => void,
   disabled?: boolean,
   children: ReactNode
 };
 
+/**
+ * Core UI component representing a button.  This defines a number of styles for standard button types.
+ * This component should be used for all buttons throughout the application to maintain a unified look and feel.
+ */
 const Button = ({
   type = 'white',
   size = 'medium',
-  classNames = [],
   onClick,
   children,
   ...rest
 }: Props) => {
-  const className = ['button', type, size, ...classNames].join(' ');
+  const className = ['button', type, size].join(' ');
   return (
     <button
       className={className}
