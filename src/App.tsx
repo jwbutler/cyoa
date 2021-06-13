@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { ReactElement, useState } from 'react';
 import ActionButton from './ActionButton';
 import Controller from './Controller';
 import Footer from './Footer';
@@ -6,6 +6,7 @@ import Menu from './Menu';
 import { GameState } from './GameState';
 import type { Scene } from './types';
 import './App.css';
+import { load as loadSavedGame } from './saveFile';
 
 type Props = {
   scenes: { [name: string]: Scene },
@@ -19,7 +20,15 @@ type Props = {
 const App = ({ scenes, initialState }: Props) => {
   const [sceneId, setSceneId] = useState(initialState.sceneId);
   const [inventory, setInventory] = useState(initialState.inventory);
-  const controller = new Controller({ initialState, sceneId, setSceneId, inventory, setInventory });
+  const [lightbox, setLightbox] = useState(null as (ReactElement | null));
+  const [savedGame, setSavedGame] = useState(loadSavedGame());
+  const controller: Controller = Controller.create({
+    initialState,
+    sceneId, setSceneId,
+    inventory, setInventory,
+    lightbox, setLightbox,
+    savedGame, setSavedGame
+  });
   const scene = scenes[sceneId];
 
   return (
@@ -37,6 +46,7 @@ const App = ({ scenes, initialState }: Props) => {
         ))}
       </Menu>
       <Footer controller={controller} />
+      {lightbox}
     </div>
   );
 }

@@ -1,12 +1,8 @@
 import Button from './Button';
 import Controller from './Controller';
+import Lightbox from './Lightbox';
 import React from 'react';
-import { GameState } from './GameState';
-import {
-  exists as saveFileExists,
-  load as loadSaveFile,
-  save as saveFile,
-} from './saveFile';
+import { equals as gameStateEquals } from './GameState';
 import './Footer.css';
 
 type Props = {
@@ -14,41 +10,125 @@ type Props = {
 }
 
 const Footer = ({ controller }: Props) => {
+  const loadPrompt = () => {
+    if (
+      gameStateEquals(controller.currentState, controller.savedGame)
+      || gameStateEquals(controller.currentState, controller.initialState)
+    ) {
+      load();
+    } else {
+      controller.setLightbox(
+        <Lightbox
+          title="Are you sure?"
+          body="You will lose any unsaved progress."
+          x={false}
+          cancel={true}
+          handleClose = {(confirm) => {
+            if (confirm) {
+              load();
+            } else {
+              controller.setLightbox(null);
+            }
+          }}
+        />
+      );
+    }
+  };
+
   const load = () => {
-    const state = loadSaveFile();
-    if (state) {
-      controller.load(state);
+    if (controller.savedGame) {
+      controller.load(controller.savedGame);
+      controller.setLightbox(
+        <Lightbox
+          title="Game loaded."
+          x={false}
+          handleClose={() => controller.setLightbox(null)}
+        />
+      );
+    } else {
+      controller.setLightbox(
+        <Lightbox
+          title="Error"
+          body="No saved game found."
+          x={false}
+          handleClose={() => controller.setLightbox(null)}
+        />
+      );
+      controller.setSavedGame(null);
+    }
+  };
+
+  const savePrompt = () => {
+    if (!gameStateEquals(controller.currentState, controller.savedGame)) {
+      controller.setLightbox(
+        <Lightbox
+          title="Are you sure?"
+          body="You will overwrite your existing saved game."
+          x={false}
+          cancel={true}
+          handleClose = {(confirm) => {
+            if (confirm) {
+              save();
+            } else {
+              controller.setLightbox(null);
+            }
+          }}
+        />
+      );
+    } else {
+      save();
     }
   };
 
   const save = () => {
-    const { sceneId, inventory }: GameState = controller;
-    saveFile({ sceneId, inventory });
+    controller.save();
+    controller.setLightbox(
+      <Lightbox
+        title="Game saved"
+        x={false}
+        handleClose={() => controller.setLightbox(null)}
+      />
+    );
   };
 
-  const restart = () => controller.restart();
+  const restartPrompt = () => {
+    controller.setLightbox(
+      <Lightbox
+        title="Are you sure?"
+        body="You will lose any unsaved progress."
+        x={false}
+        cancel={true}
+        handleClose = {(confirm) => {
+          if (confirm) {
+            controller.restart();
+          }
+          controller.setLightbox(null);
+        }}
+      />
+    );
+  };
 
   return (
     <div className="footer">
       <Button
         type="white"
         size="small"
-        onClick={restart}
+        onClick={restartPrompt}
       >
         New
       </Button>
       <Button
         type="white"
         size="small"
-        onClick={save}
+        onClick={savePrompt}
       >
         Save
       </Button>
       <Button
         type="white"
         size="small"
-        onClick={load}
-        disabled={!saveFileExists()}
+        onClick={loadPrompt}
+        disabled={!controller.savedGame}
       >
         Load
       </Button>

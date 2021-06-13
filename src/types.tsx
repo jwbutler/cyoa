@@ -22,4 +22,7 @@ type Action = {
   }
 }
 
-export type { Action, Scene };
+type Consumer<T> = (t: T) => void;
+type Supplier<T> = () => T;
+
+export type { Action, Consumer, Scene };

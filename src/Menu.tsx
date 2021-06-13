@@ -21,8 +21,8 @@ const Menu = ({ title, description, children }: Props) => {
 
   return (
     <div className="menu" ref={ref}>
-      <h1>{title}</h1>
-      <p className="description">
+      <h1 className="menu-title">{title}</h1>
+      <p className="menu-description">
         {description}
       </p>
       {children}

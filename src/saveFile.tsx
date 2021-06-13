@@ -8,12 +8,8 @@ const load = (): (GameState | null) => {
     try {
       return deserialize(serialized) as GameState;
     } catch (e) {
-      alert('Failed to load save file');
       console.log(e);
     }
-  } else {
-    // Maybe they manually cleared localStorage
-    alert('No save file found');
   }
   return null;
 }
