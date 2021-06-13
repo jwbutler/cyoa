@@ -7,8 +7,14 @@ type Props = {
   children: ReactNode
 }
 
+/**
+ * Represents the core decision display of the application.
+ * This consists of a header, descriptive text, and any number of action buttons.
+ */
 const Menu = ({ title, description, children }: Props) => {
   const ref: RefObject<any> = createRef();
+
+  // Scroll to the top of the page when entering any new scene.
   useEffect(() => {
     ref.current.scrollTo(0, 0);
   });

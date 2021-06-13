@@ -1,35 +1,14 @@
+import { Action, Scene } from './types';
 import json from './scenes.json';
 
 /*
  * This is extremely tedious; we'll delete it once we integrate with json-schema
  */
 
-interface Scene {
-  id: string,
-  name: string,
-  description?: string,
-  actions: Action[]
-}
+type ScenesById = { [ name: string]: Scene };
 
-type Action = {
-  scene?: string,
-  text: string,
-  requires?: {
-    items?: string[]
-  },
-  forbids?: {
-    items?: string[]
-  },
-  adds?: {
-    items?: string[]
-  },
-  removes?: {
-    items?: string[]
-  }
-}
-
-const importScenes: () => { [name: string]: Scene } = () => {
-  const scenesById: { [name: string]: Scene } = {};
+const importScenes: () => ScenesById = () => {
+  const scenesById: ScenesById = {};
   json.forEach(obj => {
     const room = _validateScene(obj);
     const { id } = room;
@@ -94,7 +73,7 @@ const _validateAction = (action: any): Action => {
 /**
  * Validate that all references to scene ids are valid
  */
-const _validateRefIntegrity = (scenes: { [id: string]: Scene }) => {
+const _validateRefIntegrity = (scenes: ScenesById) => {
   Object.values(scenes).forEach(room => {
     room.actions.forEach(action => {
       if (action.scene) {

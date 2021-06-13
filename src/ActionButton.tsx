@@ -1,6 +1,6 @@
 import Button from './Button';
 import Controller from './Controller';
-import type { Action } from './Scenes';
+import type { Action } from './types';
 
 type Props = {
   action: Action,
