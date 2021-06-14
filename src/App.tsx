@@ -3,7 +3,7 @@ import ActionButton from './ActionButton';
 import Controller from './Controller';
 import Footer from './Footer';
 import Menu from './Menu';
-import { GameState } from './GameState';
+import GameState from './GameState';
 import type { Scene } from './types';
 import './App.css';
 import { load as loadSavedGame } from './saveFile';

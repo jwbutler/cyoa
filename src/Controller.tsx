@@ -1,6 +1,6 @@
-import { Consumer } from './types';
-import { GameState } from './GameState';
 import { ReactElement } from 'react';
+import GameState from './GameState';
+import { Consumer } from './types';
 import { save as saveFile } from './saveFile';
 
 interface Props {
@@ -20,8 +20,7 @@ interface Props {
  * This is passed from the parent component ({@link App}) to its children, rather than passing individual
  * state elements and callback functions.
  *
- * I'm experimenting with ways to initialize this "class" concisely, without a lot of repeated definitions.
- * The result looks a little strange.
+ * Using some declaration merging tricks to create "static methods" on the type
  */
 interface Controller extends Props {
   readonly currentState: GameState;

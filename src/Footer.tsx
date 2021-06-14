@@ -1,8 +1,8 @@
+import React from 'react';
 import Button from './Button';
 import Controller from './Controller';
 import Lightbox from './Lightbox';
-import React from 'react';
-import { equals as gameStateEquals } from './GameState';
+import GameState from './GameState';
 import './Footer.css';
 
 type Props = {
@@ -12,8 +12,8 @@ type Props = {
 const Footer = ({ controller }: Props) => {
   const loadPrompt = () => {
     if (
-      gameStateEquals(controller.currentState, controller.savedGame)
-      || gameStateEquals(controller.currentState, controller.initialState)
+      GameState.equals(controller.currentState, controller.savedGame)
+      || GameState.equals(controller.currentState, controller.initialState)
     ) {
       load();
     } else {
@@ -59,7 +59,7 @@ const Footer = ({ controller }: Props) => {
   };
 
   const savePrompt = () => {
-    if (!gameStateEquals(controller.currentState, controller.savedGame)) {
+    if (!GameState.equals(controller.currentState, controller.savedGame)) {
       controller.setLightbox(
         <Lightbox
           title="Are you sure?"

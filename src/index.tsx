@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-import { GameState } from './GameState';
+import GameState from './GameState';
 import { importScenes } from './scenes';
 import './index.css';
 

@@ -1,5 +1,6 @@
-import { deserialize, GameState, serialize } from './GameState';
+import GameState from './GameState';
 
+const { deserialize, serialize } = GameState;
 const { localStorage } = window;
 
 const load = (): (GameState | null) => {
@@ -14,9 +15,7 @@ const load = (): (GameState | null) => {
   return null;
 }
 
-const save = (state: GameState) => {
-  window.localStorage.setItem('save', serialize(state));
-}
+const save = (state: GameState) => localStorage.setItem('save', serialize(state));
 
 const exists = () => !!localStorage.getItem('save');
 
