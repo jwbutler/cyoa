@@ -1,14 +1,16 @@
 import { ReactElement } from 'react';
 import GameState from './GameState';
 import { Consumer } from './types';
-import { save as saveFile } from './saveFile';
+import { save as saveFile } from '../saveFile';
 
 interface Props {
   readonly initialState: GameState,
   readonly sceneId: string,
-  readonly inventory: string[],
   readonly setSceneId: Consumer<string>,
+  readonly inventory: string[],
   readonly setInventory: Consumer<string[]>,
+  readonly visited: string[],
+  readonly setVisited: Consumer<string[]>,
   readonly lightbox: ReactElement | null,
   readonly setLightbox: Consumer<ReactElement | null>,
   readonly savedGame: GameState | null,

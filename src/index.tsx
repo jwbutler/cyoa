@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import GameState from './GameState';
-import { importScenes } from './scenes';
+import App from './components/App';
+import GameState from './types/GameState';
+import { importScenes } from './types/Scene';
 import './index.css';
 
 const scenes = importScenes();

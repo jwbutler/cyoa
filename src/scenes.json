@@ -5,26 +5,57 @@
     "description": "You're in the backyard.  There's a swing set on one end of the yard, and a small shed on another side.",
     "actions": [
       {
-        "text": "Go back inside",
+        "text": "Go back in the house",
         "scene": "dining_room"
-      },
-      {
-        "text": "Go in the shed",
-        "scene": "shed_locked",
-        "forbids": {
-          "items": ["shed_key"]
-        }
-      },
-      {
-        "text": "Go in the shed",
-        "scene": "shed_inside",
-        "requires": {
-          "items": ["shed_key"]
-        }
       },
       {
         "text": "Go to the driveway",
         "scene": "driveway"
+      },
+      {
+        "text": "Go in the shed",
+        "scene": "shed"
+      }
+    ]
+  },
+  {
+    "id": "basement",
+    "name": "Basement",
+    "description": "YOU WIN!",
+    "actions": [
+      {
+        "text": "Restart",
+        "scene": "outside_front_door"
+      }
+    ]
+  },
+  {
+    "id": "basement_stairs",
+    "name": "Basement",
+    "description": "You open the door to the basement.  There are thick vines here blocking your way!",
+    "actions": [
+      {
+        "text": "Back",
+        "scene": "kitchen"
+      }
+    ],
+    "conditions": [
+      {
+        "forbids": {
+          "items": ["axe"]
+        }
+      },
+      {
+        "requires": {
+          "items": ["axe"]
+        },
+        "actions": [
+          {
+            "text": "Cut them with your axe",
+            "type": "action",
+            "scene": "basement"
+          }
+        ]
       }
     ]
   },
@@ -125,7 +156,7 @@
         "scene": "downstairs_bathroom"
       },
       {
-        "text": "Go further inside",
+        "text": "Go to the main hall",
         "scene": "main_hall"
       }
     ]
@@ -144,7 +175,7 @@
   {
     "id": "kitchen",
     "name": "Kitchen",
-    "description": "You're in the kitchen.  There's a refrigerator, stove, and a counter with a sink here, with shelves and cabinets above them.  There's a dining table on the other side of the room.  You can go out the back door into the driveway, or go to the main hall or the dining room.",
+    "description": "You're in the kitchen.  There's a refrigerator, stove, and a counter with a sink here, with shelves and cabinets above them.  There's a dining table on the other side of the room.  You can go out the back door into the driveway, or go to the main hall or the dining room.  You can also enter the basement.",
     "actions": [
       {
         "text": "Go outside",
@@ -160,38 +191,52 @@
       },
       {
         "text": "Check the counter drawer",
-        "scene": "kitchen_counter_drawer",
-        "forbids": {
-          "items": ["shed_key"]
-        },
-        "adds": {
-          "items": ["shed_key"]
-        }
+        "scene": "kitchen_counter_drawer"
       },
       {
-        "text": "Check the counter drawer",
-        "scene": "kitchen_counter_drawer_without_key",
-        "requires": {
-          "items": ["shed_key"]
-        }
+        "text": "Enter the basement",
+        "scene": "basement_stairs"
       }
     ]
   },
   {
     "id": "kitchen_counter_drawer",
     "name": "Drawer",
-    "description": "There's a bunch of junk in here.  You also find a key!  You take the key.",
     "actions": [
       {
         "text": "Back",
         "scene": "kitchen"
       }
+    ],
+    "conditions": [
+      {
+        "forbids": {
+          "items": ["shed_key"]
+        },
+        "description": "There's a bunch of junk in here.  You notice a key in the drawer.",
+        "actions": [
+          {
+            "text": "Take the key!",
+            "type": "item",
+            "scene": "kitchen_counter_drawer_key",
+            "adds": {
+              "items": ["shed_key"]
+            }
+          }
+        ]
+      },
+      {
+        "requires": {
+          "items": ["shed_key"]
+        },
+        "description": "There's nothing in here but junk."
+      }
     ]
   },
   {
-    "id": "kitchen_counter_drawer_without_key",
+    "id": "kitchen_counter_drawer_key",
     "name": "Drawer",
-    "description": "There's nothing in here but junk.",
+    "description": "You take the key and put it in your pocket.",
     "actions": [
       {
         "text": "Back",
@@ -249,24 +294,67 @@
     ]
   },
   {
-    "id": "shed_inside",
+    "id": "shed",
     "name": "Shed",
-    "description": "You're in the shed.  It's stuffed with assorted outdoor toys, such as frisbees and various types of ball.",
     "actions": [
       {
         "text": "Go outside",
         "scene": "backyard"
       }
+    ],
+    "conditions": [
+      {
+        "forbids": {
+          "items": ["shed_key"]
+        },
+        "description": "It's locked.  Maybe there's a key somewhere..."
+      },
+      {
+        "forbids": {
+          "items": ["axe"],
+          "visited": ["basement_stairs"]
+        },
+        "requires": {
+          "items": ["shed_key"]
+        },
+        "description": "You're in the shed.  There's a workbench here with a variety of tools."
+      },
+      {
+        "forbids": {
+          "items": ["axe"]
+        },
+        "requires": {
+          "items": ["shed_key"],
+          "visited": ["basement_stairs"]
+        },
+        "description": "You're in the shed.  There's a workbench here with a variety of tools, including an axe.",
+        "actions": [
+          {
+            "text": "Take the axe!",
+            "type": "item",
+            "scene": "shed",
+            "adds": {
+              "items": ["axe"]
+            }
+          }
+        ]
+      },
+      {
+        "requires": {
+          "items": ["axe", "shed_key"]
+        },
+        "description": "You're in the shed.  It's stuffed with assorted outdoor toys, such as frisbees and various types of ball."
+      }
     ]
   },
   {
-    "id": "shed_locked",
+    "id": "shed_axe",
     "name": "Shed",
-    "description": "It's locked.  Maybe there's a key somewhere...",
+    "description": "You take the axe.  It looks a bit rusty, but fairly sharp.  It feels heavy in your hand.",
     "actions": [
       {
         "text": "Back",
-        "scene": "backyard"
+        "scene": "shed"
       }
     ]
   }

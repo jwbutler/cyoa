@@ -1,4 +1,4 @@
-import GameState from './GameState';
+import GameState from './types/GameState';
 
 const { deserialize, serialize } = GameState;
 const { localStorage } = window;

@@ -1,12 +1,13 @@
 import React, { ReactElement, useState } from 'react';
+import Condition from '../types/Condition';
 import ActionButton from './ActionButton';
-import Controller from './Controller';
+import Controller from '../types/Controller';
 import Footer from './Footer';
 import Menu from './Menu';
-import GameState from './GameState';
-import type { Scene } from './types';
+import GameState from '../types/GameState';
+import Scene from '../types/Scene';
 import './App.css';
-import { load as loadSavedGame } from './saveFile';
+import { load as loadSavedGame } from '../saveFile';
 
 type Props = {
   scenes: { [name: string]: Scene },
@@ -20,24 +21,37 @@ type Props = {
 const App = ({ scenes, initialState }: Props) => {
   const [sceneId, setSceneId] = useState(initialState.sceneId);
   const [inventory, setInventory] = useState(initialState.inventory);
+  const [visited, setVisited] = useState([] as string[]);
   const [lightbox, setLightbox] = useState(null as (ReactElement | null));
   const [savedGame, setSavedGame] = useState(loadSavedGame());
+
   const controller: Controller = Controller.create({
     initialState,
     sceneId, setSceneId,
     inventory, setInventory,
+    visited, setVisited,
     lightbox, setLightbox,
     savedGame, setSavedGame
   });
+
   const scene = scenes[sceneId];
+  let { description } = scene;
+  const actions = [...scene.actions || []];
+  scene.conditions?.forEach(condition => {
+    if (Condition.evaluate(condition, controller)) {
+      condition?.actions?.forEach(action => actions.push(action));
+      // TODO - this assumes conditions are mutually exclusive
+      description = description || condition.description;
+    }
+  });
 
   return (
     <div className="app">
       <Menu
         title={scene.name}
-        description={scene.description}
+        description={description}
       >
-        {scene.actions.map((action, index) => (
+        {actions.map((action, index) => (
           <ActionButton
             action={action}
             controller={controller}

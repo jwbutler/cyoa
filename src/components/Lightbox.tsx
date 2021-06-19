@@ -1,6 +1,6 @@
 import Button from './Button';
 import './Lightbox.css';
-import { Consumer } from './types';
+import { Consumer } from '../types/types';
 
 type Props = {
   title?: string,
