@@ -1,8 +1,8 @@
 import React from 'react';
 import Button from './Button';
-import Controller from './Controller';
+import Controller from '../types/Controller';
 import Lightbox from './Lightbox';
-import GameState from './GameState';
+import GameState from '../types/GameState';
 import './Footer.css';
 
 type Props = {
@@ -84,7 +84,7 @@ const Footer = ({ controller }: Props) => {
     controller.save();
     controller.setLightbox(
       <Lightbox
-        title="Game saved"
+        title="Game saved."
         x={false}
         handleClose={() => controller.setLightbox(null)}
       />

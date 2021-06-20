@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
 import './Button.css';
 
-type ButtonType = 'white';
-type ButtonSize = 'small' | 'medium';
+type ButtonType = 'white' | 'white_blue' | 'blue';
+type ButtonSize = 'medium' | 'small';
 
 type Props = {
   type?: ButtonType,
@@ -34,5 +34,10 @@ const Button = ({
     </button>
   );
 };
+
+namespace Button {
+  export type Type = ButtonType;
+  export type Size = ButtonSize;
+}
 
 export default Button;

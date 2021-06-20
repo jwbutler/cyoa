@@ -1,4 +1,4 @@
-import GameState from './GameState';
+import GameState from './types/GameState';
 
 const { deserialize, serialize } = GameState;
 const { localStorage } = window;
@@ -13,7 +13,7 @@ const load = (): (GameState | null) => {
     }
   }
   return null;
-}
+};
 
 const save = (state: GameState) => localStorage.setItem('save', serialize(state));
 
