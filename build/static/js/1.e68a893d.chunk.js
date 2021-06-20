@@ -1,2 +1,0 @@
-(this.webpackJsonpcyoa=this.webpackJsonpcyoa||[]).push([[1],{56:function(e){e.exports=JSON.parse('{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"Condition.schema.json","type":"object","properties":{"requires":{"type":"object","properties":{"items":{"type":"array","items":{"type":"string"}}}},"forbids":{"type":"object","properties":{"items":{"type":"array","items":{"type":"string"}}}},"description":{"type":"string"},"actions":{"$ref":"Action.schema.json"}},"additionalProperties":false}')}}]);
-//# sourceMappingURL=1.e68a893d.chunk.js.map

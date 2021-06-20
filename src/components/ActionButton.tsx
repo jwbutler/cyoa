@@ -28,6 +28,6 @@ const ActionButton = ({ action, controller }: Props) => {
       {action.text}
     </Button>
   );
-}
+};
 
 export default ActionButton;
