@@ -35,11 +35,6 @@
     ],
     "conditions": [
       {
-        "forbids": {
-          "items": ["axe"]
-        }
-      },
-      {
         "requires": {
           "items": ["axe"]
         },
