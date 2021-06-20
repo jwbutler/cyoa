@@ -21,13 +21,7 @@
   {
     "id": "basement",
     "name": "Basement",
-    "description": "YOU WIN!",
-    "actions": [
-      {
-        "text": "Restart",
-        "scene": "outside_front_door"
-      }
-    ]
+    "description": "YOU WIN!"
   },
   {
     "id": "basement_stairs",
@@ -118,6 +112,10 @@
     "description": "You're in the driveway.  There's a garage here with two cars outside it.  You can go to the backyard or into the kitchen through the back door.",
     "actions": [
       {
+        "text": "Walk around to the front of the house",
+        "scene": "outside_front_door"
+      },
+      {
         "text": "Go to the kitchen",
         "scene": "kitchen"
       },
@@ -190,12 +188,22 @@
         "scene": "dining_room"
       },
       {
-        "text": "Check the counter drawer",
-        "scene": "kitchen_counter_drawer"
-      },
-      {
         "text": "Enter the basement",
         "scene": "basement_stairs"
+      }
+    ],
+    "conditions": [
+      {
+        "forbids": {
+          "items": ["shed_key"]
+        },
+        "actions": [
+          {
+            "text": "Check the counter drawer",
+            "type": "action",
+            "scene": "kitchen_counter_drawer"
+          }
+        ]
       }
     ]
   },
@@ -280,6 +288,20 @@
         "text": "Go to the front hall",
         "scene": "front_hall"
       }
+    ],
+    "conditions": [
+      {
+        "forbids": {
+          "visited": ["piano"]
+        },
+        "actions": [
+          {
+            "text": "Play the piano",
+            "type": "action",
+            "scene": "piano"
+          }
+        ]
+      }
     ]
   },
   {
@@ -290,6 +312,21 @@
       {
         "text": "Go inside",
         "scene": "front_hall"
+      },
+      {
+        "text": "Walk around to the driveway",
+        "scene": "driveway"
+      }
+    ]
+  },
+  {
+    "id": "piano",
+    "name": "Piano",
+    "description": "You bang around randomly on the piano with both hands.  It sounds awful!",
+    "actions": [
+      {
+        "text": "Back",
+        "scene": "main_hall"
       }
     ]
   },
@@ -343,7 +380,7 @@
         "requires": {
           "items": ["axe", "shed_key"]
         },
-        "description": "You're in the shed.  It's stuffed with assorted outdoor toys, such as frisbees and various types of ball."
+        "description": "You're in the shed.  There's a workbench here with a variety of tools."
       }
     ]
   },

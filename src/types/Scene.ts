@@ -5,30 +5,28 @@ import Condition from './Condition';
 import { assert, hasUnknownProperties, isObject } from './validation';
 
 type Scene = {
-  id: string,
-  name: string,
-  description?: string,
-  actions?: Readonly<Action[]>,
-  conditions?: Readonly<Condition[]>
+  readonly id: string,
+  readonly name: string,
+  readonly description?: string,
+  readonly actions?: ReadonlyArray<Action>,
+  readonly conditions?: ReadonlyArray<Condition>
 }
 
-type ScenesById = { [ id: string]: Scene };
-
-const importScenes: () => ScenesById = () => {
-  const scenesById: ScenesById = {};
+const importScenes: () => Scene[] = () => {
+  const scenesById: { [ id: string]: Scene } = {};
   json.forEach(obj => {
     const scene = Scene.validate(obj);
     const { id } = scene;
     scenesById[id] = scene;
   });
   validateReferences(scenesById);
-  return scenesById;
-}
+  return Object.values(scenesById);
+};
 
 /**
  * Validate that all references to scene names are valid
  */
-const validateReferences = (scenes: ScenesById) => {
+const validateReferences = (scenes: { [ id: string]: Scene }) => {
   Object.values(scenes).forEach(room => {
     const actions: Action[] = [];
     room.actions?.forEach(action => actions.push(action));
@@ -41,7 +39,7 @@ const validateReferences = (scenes: ScenesById) => {
       }
     });
   });
-}
+};
 
 namespace Scene {
   export const validate = (scene: any): Scene => {

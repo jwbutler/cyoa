@@ -10,14 +10,14 @@ namespace Action {
 }
 
 type Action = {
-  text: string,
-  type: Action.Type,
-  scene: string,
-  adds?: {
-    items?: string[]
+  readonly text: string,
+  readonly type: Action.Type,
+  readonly scene: string,
+  readonly adds?: {
+    readonly items?: ReadonlyArray<string>
   },
-  removes?: {
-    items?: string[]
+  readonly removes?: {
+    readonly items?: ReadonlyArray<string>
   }
 };
 
@@ -79,6 +79,18 @@ namespace Action {
   };
 
   export const getKey = (action: Action) => btoa(JSON.stringify(action));
+
+  export const sort = (actions: Action[]) => {
+    const getPriority = (action: Action): number => {
+      switch (action.type) {
+        case Action.Type.ACTION: return 2;
+        case Action.Type.ITEM:   return 1;
+        case Action.Type.SCENE:  return 0;
+      }
+    };
+
+    actions.sort((a, b) => getPriority(b) - getPriority(a));
+  };
 }
 
 export default Action;

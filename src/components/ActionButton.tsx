@@ -9,7 +9,7 @@ type Props = {
 
 const colors: Record<Action.Type, Button.Type> = {
   [Action.Type.SCENE]: 'white',
-  [Action.Type.ACTION]: 'blue',
+  [Action.Type.ACTION]: 'white_blue',
   [Action.Type.ITEM]: 'white_blue'
 };
 

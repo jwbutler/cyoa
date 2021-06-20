@@ -13,7 +13,7 @@ const load = (): (GameState | null) => {
     }
   }
   return null;
-}
+};
 
 const save = (state: GameState) => localStorage.setItem('save', serialize(state));
 

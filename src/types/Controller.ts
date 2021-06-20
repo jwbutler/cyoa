@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import GameState from './GameState';
 import { Consumer } from './types';
 import { save as saveFile } from '../saveFile';
@@ -33,12 +33,13 @@ interface Controller extends Props {
 
 namespace Controller {
   export const create = (props: Props) => {
-    const currentState = {
+    const currentState: GameState = {
       sceneId: props.sceneId,
-      inventory: props.inventory
+      inventory: props.inventory,
+      visited: props.visited
     };
 
-    const load = ({ sceneId, inventory }: GameState) => {
+    const load = ({ sceneId, inventory, visited }: GameState) => {
       const { setSceneId, setInventory } = props;
       setSceneId(sceneId);
       setInventory(inventory);
@@ -50,7 +51,7 @@ namespace Controller {
       const { setSavedGame } = props;
       saveFile(currentState);
       setSavedGame(currentState);
-    }
+    };
 
     return {
       ...props,

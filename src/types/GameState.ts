@@ -2,8 +2,9 @@
  * Using some declaration merging tricks to create "static methods" on the type
  */
 type GameState = {
-  sceneId: string,
-  inventory: string[]
+  readonly sceneId: string,
+  readonly inventory: string[],
+  readonly visited: string[]
 };
 
 namespace GameState {

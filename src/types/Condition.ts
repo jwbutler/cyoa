@@ -3,16 +3,16 @@ import { assert, hasUnknownProperties, isObject } from './validation';
 import Action from './Action';
 
 type Condition = {
-  requires?: {
-    items?: string[]
-    visited?: string[]
+  readonly requires?: {
+    readonly items?: ReadonlyArray<string>,
+    readonly visited?: ReadonlyArray<string>
   },
-  forbids?: {
-    items?: string[],
-    visited?: string[]
+  readonly forbids?: {
+    readonly items?: ReadonlyArray<string>,
+    readonly visited?: ReadonlyArray<string>
   },
-  actions?: Action[],
-  description?: string
+  readonly actions?: ReadonlyArray<Action>,
+  readonly description?: string
 };
 
 namespace Condition {
@@ -83,7 +83,7 @@ namespace Condition {
       }
     }
     return true;
-  }
+  };
 }
 
 export default Condition;

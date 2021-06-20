@@ -11,7 +11,8 @@ button.button:active {
 }
 
 @media (pointer: fine) {
-  button.button:active,button.button:hover {
+  button.button:active,
+  button.button:hover {
     box-shadow: 0 1px 2px 3px rgba(0.5, 0.5, 0.5, 0.1);
   }
 }
@@ -25,13 +26,13 @@ button.button:disabled {
 /* Sizes */
 
 button.button.medium {
-  font-size: 1em;
+  font-size: 1rem;
   border-radius: 10px;
   padding: 10px;
 }
 
 button.button.small {
-  font-size: 0.8em;
+  font-size: 0.8rem;
   border-radius: 8px;
   padding: 8px;
 }
@@ -40,7 +41,7 @@ button.button.small {
 
 button.button.white {
   background-color: #fff;
-  border-color: rgba(0, 0, 0, 0.75);
+  border-color: #000;
   color: #000;
 }
 
@@ -52,6 +53,6 @@ button.button.white_blue {
 
 button.button.blue {
   background-color: #48f;
-  border-color: #fff;
+  border-color: #000;
   color: #fff;
 }

@@ -15,7 +15,3 @@ code {
 * {
   box-sizing: border-box;
 }
-
-.root {
-  max-width: 640px;
-}

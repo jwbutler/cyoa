@@ -1,4 +1,5 @@
 import React, { ReactElement, useState } from 'react';
+import Action from '../types/Action';
 import Condition from '../types/Condition';
 import ActionButton from './ActionButton';
 import Controller from '../types/Controller';
@@ -10,9 +11,17 @@ import './App.css';
 import { load as loadSavedGame } from '../saveFile';
 
 type Props = {
-  scenes: { [name: string]: Scene },
+  scenes: Scene[],
   initialState: GameState
 }
+
+const toMap = <T, >(items: T[], mapper: (item: T) => string): { [key: string]: T } => {
+  const map: { [key: string]: T } = {};
+  items.forEach(item => {
+    map[mapper(item)] = item;
+  });
+  return map;
+};
 
 /**
  * Entry point for the game engine.  There should be no game-specific logic from this point on; all behavior
@@ -24,6 +33,7 @@ const App = ({ scenes, initialState }: Props) => {
   const [visited, setVisited] = useState([] as string[]);
   const [lightbox, setLightbox] = useState(null as (ReactElement | null));
   const [savedGame, setSavedGame] = useState(loadSavedGame());
+  const scenesById: { [id: string]: Scene } = toMap(scenes, scene => scene.id);
 
   const controller: Controller = Controller.create({
     initialState,
@@ -34,7 +44,12 @@ const App = ({ scenes, initialState }: Props) => {
     savedGame, setSavedGame
   });
 
-  const scene = scenes[sceneId];
+  const scene = scenesById[sceneId];
+
+  if (!visited.includes(sceneId)) {
+    visited.push(sceneId);
+  }
+
   let { description } = scene;
   const actions = [...scene.actions || []];
   scene.conditions?.forEach(condition => {
@@ -44,6 +59,8 @@ const App = ({ scenes, initialState }: Props) => {
       description = description || condition.description;
     }
   });
+
+  Action.sort(actions);
 
   return (
     <div className="app">
@@ -63,6 +80,6 @@ const App = ({ scenes, initialState }: Props) => {
       {lightbox}
     </div>
   );
-}
+};
 
 export default App;
