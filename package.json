@@ -2,7 +2,7 @@
   "name": "cyoa",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://jwbutler.github.io/cyoa",
+  "homepage": "https://jwb-cyoa.netlify.com",
   "dependencies": {
     "@testing-library/jest-dom": "^5.13.0",
     "@testing-library/react": "^11.2.7",
