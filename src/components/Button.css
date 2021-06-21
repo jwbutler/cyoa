@@ -1,12 +1,13 @@
-button.button {
+button {
   border: 1px solid;
   box-shadow: 0 1px 1px 2px rgba(0.5, 0.5, 0.5, 0.05);
-  min-width: 60px;
+  min-width: 4rem;
+  cursor: pointer;
 }
 
 /* States */
 
-button.button:active {
+button:active {
   filter: brightness(0.9);
 }
 
@@ -17,7 +18,7 @@ button.button:active {
   }
 }
 
-button.button:disabled {
+button:disabled {
   background-color: #ddd;
   border-color: #888;
   color: #888;
@@ -25,33 +26,33 @@ button.button:disabled {
 
 /* Sizes */
 
-button.button.medium {
+button.medium {
   font-size: 1rem;
-  border-radius: 10px;
-  padding: 10px;
+  border-radius: .75rem;
+  padding: .75rem;
 }
 
-button.button.small {
+button.small {
   font-size: 0.8rem;
   border-radius: 8px;
-  padding: 8px;
+  padding: .5rem;
 }
 
 /* Types */
 
-button.button.white {
+button.white {
   background-color: #fff;
   border-color: #000;
   color: #000;
 }
 
-button.button.white_blue {
+button.white_blue {
   background-color: #fff;
   border-color: #48f;
   color: #48f;
 }
 
-button.button.blue {
+button.blue {
   background-color: #48f;
   border-color: #000;
   color: #fff;
