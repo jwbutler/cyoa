@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import './Button.css';
+import styles from './Button.module.css';
 
 type ButtonType = 'white' | 'white_blue' | 'blue';
 type ButtonSize = 'medium' | 'small';
@@ -7,6 +7,8 @@ type ButtonSize = 'medium' | 'small';
 type Props = {
   type?: ButtonType,
   size?: ButtonSize,
+  className?: string,
+  fullWidth?: boolean
   onClick?: () => void,
   disabled?: boolean,
   children: ReactNode
@@ -19,14 +21,19 @@ type Props = {
 const Button = ({
   type = 'white',
   size = 'medium',
+  className,
+  fullWidth,
   onClick,
   children,
   ...rest
 }: Props) => {
-  const className = ['button', type, size].join(' ');
+  const classNames = [styles.button, styles[type], styles[size]];
+  if (fullWidth) {
+    classNames.push(styles.fullWidth);
+  }
   return (
     <button
-      className={className}
+      className={classNames.join(' ')}
       onClick={onClick}
       {...rest}
     >

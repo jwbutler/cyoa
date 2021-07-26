@@ -7,11 +7,12 @@ import Footer from './Footer';
 import Menu from './Menu';
 import GameState from '../types/GameState';
 import Scene from '../types/Scene';
-import './App.css';
 import { load as loadSavedGame } from '../saveFile';
+import styles from './Game.module.css';
 
 type Props = {
   scenes: Scene[],
+  setScenes: (scenes: Scene[]) => void,
   initialState: GameState
 }
 
@@ -27,7 +28,7 @@ const toMap = <T, >(items: T[], mapper: (item: T) => string): { [key: string]: T
  * Entry point for the game engine.  There should be no game-specific logic from this point on; all behavior
  * is driven by the data passed as props.
  */
-const App = ({ scenes, initialState }: Props) => {
+const Game = ({ scenes, setScenes, initialState }: Props) => {
   const [sceneId, setSceneId] = useState(initialState.sceneId);
   const [inventory, setInventory] = useState(initialState.inventory);
   const [visited, setVisited] = useState([] as string[]);
@@ -45,6 +46,9 @@ const App = ({ scenes, initialState }: Props) => {
   });
 
   const scene = scenesById[sceneId];
+  if (!scene) {
+    return null;
+  }
 
   if (!visited.includes(sceneId)) {
     visited.push(sceneId);
@@ -63,7 +67,7 @@ const App = ({ scenes, initialState }: Props) => {
   Action.sort(actions);
 
   return (
-    <div className="app">
+    <div className={styles.game}>
       <Menu
         title={scene.name}
         description={description}
@@ -76,10 +80,14 @@ const App = ({ scenes, initialState }: Props) => {
           />
         ))}
       </Menu>
-      <Footer controller={controller} />
+      <Footer
+        controller={controller}
+        scenes={scenes}
+        setScenes={setScenes}
+      />
       {lightbox}
     </div>
   );
 };
 
-export default App;
+export default Game;

@@ -1,0 +1,45 @@
+.debug {
+  min-height: 15rem;
+  max-height: 30rem;
+  margin: 0 auto;
+  width: 75%;
+  padding-bottom: 20px;
+  display: flex;
+
+  flex-direction: row;
+  justify-content: center;
+  align-items:stretch;
+}
+
+.scenes {
+  margin-right: 20px;
+  overflow: auto;
+  padding: 20px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid #ccc;
+  flex-basis: 40%;
+}
+
+.scenes > *:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.sceneButton {
+  display: block;
+  width: 100%;
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  justify-content: stretch;
+  align-items: stretch;
+  flex-basis: 60%;
+}
+
+.textarea {
+  width: 100%;
+  flex-basis: 90%;
+  margin-bottom: 20px;
+  resize: none;
+}

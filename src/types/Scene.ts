@@ -1,5 +1,3 @@
-import json from '../scenes.json';
-
 import Action from './Action';
 import Condition from './Condition';
 import { assert, hasUnknownProperties, isObject } from './validation';
@@ -12,7 +10,7 @@ type Scene = {
   readonly conditions?: ReadonlyArray<Condition>
 }
 
-const importScenes: () => Scene[] = () => {
+const validateScenes = (json: any[]): Scene[] => {
   const scenesById: { [ id: string]: Scene } = {};
   json.forEach(obj => {
     const scene = Scene.validate(obj);
@@ -20,7 +18,8 @@ const importScenes: () => Scene[] = () => {
     scenesById[id] = scene;
   });
   validateReferences(scenesById);
-  return Object.values(scenesById);
+  // @ts-ignore
+  return Object.values(scenesById).sort((a, b) => b.id - a.id);
 };
 
 /**
@@ -75,4 +74,4 @@ namespace Scene {
 }
 
 export default Scene;
-export { importScenes };
+export { validateScenes };

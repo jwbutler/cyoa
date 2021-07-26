@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Scene, { validateScenes } from '../types/Scene';
 import Button from './Button';
 import Controller from '../types/Controller';
+import DebugPanel from './DebugPanel';
 import Lightbox from './Lightbox';
 import GameState from '../types/GameState';
-import './Footer.css';
+import styles from './Footer.module.css';
 
 type Props = {
-  controller: Controller
+  controller: Controller,
+  scenes: Scene[],
+  setScenes: (json: any) => void
 }
 
-const Footer = ({ controller }: Props) => {
+const Footer = ({ controller, scenes, setScenes }: Props) => {
+  const [debugPanelVisible, setDebugPanelVisible] = useState(false);
+
   const loadPrompt = () => {
     if (
       GameState.equals(controller.currentState, controller.savedGame)
@@ -109,31 +115,50 @@ const Footer = ({ controller }: Props) => {
   };
 
   return (
-    <div className="footer">
-      <Button
-        type="white"
-        size="small"
-        onClick={restartPrompt}
-      >
-        New
-      </Button>
-      <Button
-        type="white"
-        size="small"
-        onClick={savePrompt}
-      >
-        Save
-      </Button>
-      <Button
-        type="white"
-        size="small"
-        onClick={loadPrompt}
-        disabled={!controller.savedGame}
-      >
-        Load
-      </Button>
+    <div className={styles.footer}>
+      {debugPanelVisible && (
+        <DebugPanel
+          scenes={scenes}
+          initialSceneId={controller.currentState.sceneId}
+          save={text => {
+            const scenes = validateScenes(JSON.parse(text));
+            setScenes(scenes);
+          }}
+        />
+      )}
+      <div className={styles.buttons}>
+        <Button
+          type="white"
+          size="small"
+          onClick={restartPrompt}
+        >
+          New
+        </Button>
+        <Button
+          type="white"
+          size="small"
+          onClick={savePrompt}
+        >
+          Save
+        </Button>
+        <Button
+          type="white"
+          size="small"
+          onClick={loadPrompt}
+          disabled={!controller.savedGame}
+        >
+          Load
+        </Button>
+        <Button
+          type="white"
+          size="small"
+          onClick={() => setDebugPanelVisible(!debugPanelVisible)}
+        >
+          Debug
+        </Button>
+      </div>
     </div>
   );
-}
+};
 
 export default Footer;

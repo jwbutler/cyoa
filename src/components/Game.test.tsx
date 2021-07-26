@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import Game from './Game';
 
 const scenes = [
   {
@@ -17,7 +17,7 @@ const state = {
 };
 
 test('starts outside house', () => {
-  render(<App initialState={state} scenes={scenes} />);
+  render(<Game initialState={state} scenes={scenes} />);
   const headerText = screen.getByText(/Outside the House/i);
   expect(headerText).toBeInTheDocument();
 });

@@ -1,6 +1,6 @@
 import Button from './Button';
-import './Lightbox.css';
 import { Consumer } from '../types/types';
+import styles from './Lightbox.module.css';
 
 type Props = {
   title?: string,
@@ -21,16 +21,16 @@ const Lightbox = ({
 }: Props) => (
   <>
     {/* Don't nest this inside the lightbox for CSS reasons */}
-    <div className="lightbox-background" />
-    <div className="lightbox">
+    <div className={styles.background} />
+    <div className={styles.lightbox}>
       {x && (
-        <div className="lightbox-x" onClick={() => handleClose(false)}>×</div>
+        <div className={styles.x} onClick={() => handleClose(false)}>×</div>
       )}
-      <h2 className="lightbox-title">
+      <h2 className={styles.title}>
         {title || ' '}
       </h2>
       {body && (
-        <p className="lightbox-body">
+        <p className={styles.body}>
           {body}
         </p>
       )}

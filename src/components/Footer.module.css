@@ -1,14 +1,20 @@
 .footer {
   display: flex;
+  flex-direction: column;
   background-color: #f0f8ff;
   border-top: 1px solid #cdd;
   padding: 1rem 0;
   text-align: center;
-  align-items: flex-end;
-  flex-direction: row;
-  justify-content: center;
 }
 
-.footer > * {
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #f0f8ff;
+}
+
+.buttons > * {
   margin: 0 .75rem;
 }

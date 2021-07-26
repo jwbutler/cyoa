@@ -17,7 +17,7 @@
   justify-content: space-between;
 }
 
-.lightbox-background {
+.background {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
   left: 0;
@@ -26,7 +26,7 @@
   height: 100vh;
 }
 
-.lightbox-x {
+.x {
   position: absolute;
   right: 1rem;
   top: 10px;
@@ -41,7 +41,7 @@
   justify-content: space-between;
 }
 
-.lightbox-title {
+.title {
   margin-top: 0;
 }
 
