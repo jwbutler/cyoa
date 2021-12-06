@@ -58,26 +58,28 @@ const App = ({ scenes, initialState }: Props) => {
         actions.push(action);
       }
       // TODO - this assumes conditions are mutually exclusive
-      description = description || condition.description;
+      if (condition.description) {
+        description = description || condition.description;
+      }
     }
   }
 
   Action.sort(actions);
+  const actionButtons = actions.map((action, index) => (
+    <ActionButton
+      action={action}
+      controller={controller}
+      key={`${action.text}_${index}`}
+    />
+  ));
 
   return (
     <div className="app">
       <Menu
         title={scene.name}
-        description={description}
-      >
-        {actions.map((action, index) => (
-          <ActionButton
-            action={action}
-            controller={controller}
-            key={`${action.text}_${index}`}
-          />
-        ))}
-      </Menu>
+        description={description || ''}
+        actions={actionButtons}
+      />
       <Footer controller={controller} />
       {lightbox}
     </div>

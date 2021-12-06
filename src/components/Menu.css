@@ -5,18 +5,31 @@
   margin: 0 auto;
   max-width: 40rem;
   overflow: auto;
-  padding: 1rem;
-  text-align: center;
-}
-
-.menu > *:not(:first-child) {
-  margin-top: .75rem;
-}
-
-.menu > *:not(:last-child) {
-  margin-bottom: .75rem;
 }
 
 .menu h1.menu-title {
   margin-top: 0;
+  text-align: center;
+}
+
+.menu-description {
+  text-align: left;
+}
+
+.menu-actions {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  width: 100%;
+  padding-left: 12.5%;
+  padding-right: 12.5%;
+  margin-top: 1rem;
+}
+
+.menu-actions > *:not(:first-child) {
+  margin-top: .5rem;
+}
+
+.menu-actions > *:not(:last-child) {
+  margin-bottom: .5rem;
 }

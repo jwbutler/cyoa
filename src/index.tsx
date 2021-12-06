@@ -7,7 +7,7 @@ import './index.css';
 
 const scenes = importScenes();
 const initialState: GameState = {
-  sceneId: 'outside_front_door',
+  sceneId: 'intro',
   inventory: [],
   visited: []
 };
