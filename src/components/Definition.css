@@ -1,0 +1,10 @@
+.definition {
+  display: flex;
+  align-items: stretch;
+  flex-direction: column;
+  margin: 1rem auto 1rem;
+  max-width: 40rem;
+  overflow: auto;
+  border-top: 1px solid black;
+  padding-top: 1rem;
+}

@@ -1,8 +1,10 @@
 import React, { ReactElement, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import Action from '../types/Action';
 import Condition from '../types/Condition';
 import ActionButton from './ActionButton';
 import Controller from '../types/Controller';
+import Definition from './Definition';
 import Footer from './Footer';
 import Menu from './Menu';
 import GameState from '../types/GameState';
@@ -12,6 +14,7 @@ import { load as loadSavedGame } from '../saveFile';
 
 type Props = {
   scenes: Scene[],
+  definitions: Record<string, string>,
   initialState: GameState
 }
 
@@ -27,12 +30,13 @@ const toMap = <T, >(items: T[], mapper: (item: T) => string): Record<string, T> 
  * Entry point for the game engine.  There should be no game-specific logic from this point on; all behavior
  * is driven by the data passed as props.
  */
-const App = ({ scenes, initialState }: Props) => {
+const App = ({ scenes, definitions, initialState }: Props) => {
   const [sceneId, setSceneId] = useState(initialState.sceneId);
   const [inventory, setInventory] = useState(initialState.inventory);
   const [visited, setVisited] = useState([] as string[]);
   const [lightbox, setLightbox] = useState(null as (ReactElement | null));
   const [savedGame, setSavedGame] = useState(loadSavedGame());
+  const location = useLocation();
   const scenesById: Record<string, Scene> = toMap(scenes, scene => scene.id);
 
   const controller: Controller = Controller.create({
@@ -73,6 +77,10 @@ const App = ({ scenes, initialState }: Props) => {
     />
   ));
 
+  const term = (location.hash && definitions[location.hash.substring(1)]) ? location.hash.substring(1) : null;
+  const definition = (term) ? definitions[term] : null;
+  console.log(term);
+
   return (
     <div className="app">
       <Menu
@@ -80,6 +88,7 @@ const App = ({ scenes, initialState }: Props) => {
         description={description || ''}
         actions={actionButtons}
       />
+      {term && definition && (<Definition term={term} definition={definition} />)}
       <Footer controller={controller} />
       {lightbox}
     </div>

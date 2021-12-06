@@ -1,4 +1,4 @@
-import json from '../scenes.json';
+import json from '../data/scenes.json';
 
 import Action from './Action';
 import Condition from './Condition';
@@ -47,6 +47,16 @@ const validateReferences = (scenes: Record<string, Scene>) => {
   }
 };
 
+/**
+ * Perform the following substitutions on the description:
+ *   1. Replace newlines with <br />
+ *   2. Replace links in the form [text](link) with appropriate hyperlinks
+ */
+const parseDescription = (description: string) => description
+    .replace(/\[(.*)\]\((.*)\)/g, (match, p1, p2) => `<a href="#${p2}">${p1}</a>`)
+    .split('\n')
+    .join('<br/>');
+
 namespace Scene {
   export const validate = (scene: any): Scene => {
     assert(isObject(scene), scene);
@@ -74,9 +84,11 @@ namespace Scene {
     }
 
     assert(!hasUnknownProperties(scene, ['id', 'name', 'description', 'actions', 'conditions']), scene);
+    console.log(scene.description);
 
     return {
       ...scene,
+      description: scene.description ? parseDescription(scene.description) : undefined,
       actions,
       conditions
     };
