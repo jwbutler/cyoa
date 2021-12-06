@@ -1,4 +1,6 @@
 import './Definition.css';
+import { parseMarkup } from '../utils/markup';
+import UnsafeHTML from './UnsafeHTML';
 
 type Props = {
   term: string,
@@ -7,7 +9,7 @@ type Props = {
 
 const Definition = ({ term, definition }: Props) => (
   <div className="definition">
-    {definition}
+    <UnsafeHTML>{parseMarkup(definition)}</UnsafeHTML>
   </div>
 );
 
