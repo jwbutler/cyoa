@@ -15,11 +15,11 @@ type Props = {
   initialState: GameState
 }
 
-const toMap = <T, >(items: T[], mapper: (item: T) => string): { [key: string]: T } => {
-  const map: { [key: string]: T } = {};
-  items.forEach(item => {
+const toMap = <T, >(items: T[], mapper: (item: T) => string): Record<string, T> => {
+  const map: Record<string, T> = {};
+  for (const item of items) {
     map[mapper(item)] = item;
-  });
+  }
   return map;
 };
 
@@ -33,7 +33,7 @@ const App = ({ scenes, initialState }: Props) => {
   const [visited, setVisited] = useState([] as string[]);
   const [lightbox, setLightbox] = useState(null as (ReactElement | null));
   const [savedGame, setSavedGame] = useState(loadSavedGame());
-  const scenesById: { [id: string]: Scene } = toMap(scenes, scene => scene.id);
+  const scenesById: Record<string, Scene> = toMap(scenes, scene => scene.id);
 
   const controller: Controller = Controller.create({
     initialState,
@@ -52,13 +52,15 @@ const App = ({ scenes, initialState }: Props) => {
 
   let { description } = scene;
   const actions = [...scene.actions || []];
-  scene.conditions?.forEach(condition => {
+  for (const condition of scene.conditions || []) {
     if (Condition.evaluate(condition, controller)) {
-      condition?.actions?.forEach(action => actions.push(action));
+      for (const action of condition?.actions || []) {
+        actions.push(action);
+      }
       // TODO - this assumes conditions are mutually exclusive
       description = description || condition.description;
     }
-  });
+  }
 
   Action.sort(actions);
 

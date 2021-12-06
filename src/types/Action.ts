@@ -2,10 +2,9 @@ import Controller from './Controller';
 import { assert, hasUnknownProperties, isObject } from './validation';
 
 namespace Action {
-  export enum Type {
-    SCENE = 'scene',
-    ITEM = 'item',
-    ACTION = 'action'
+  export type Type = 'scene' | 'item' | 'action';
+  export namespace Type {
+    export const values = () => ['scene', 'item', 'action'];
   }
 }
 
@@ -25,7 +24,7 @@ namespace Action {
   export const validate = (action: any): Action => {
     assert(action.hasOwnProperty('text') && typeof action.text === 'string', action);
     if (action.hasOwnProperty('type')) {
-      assert(Object.values(Action.Type).includes(action.type), action);
+      assert(Action.Type.values().includes(action.type), action);
     }
     assert(action.hasOwnProperty('scene'), action);
     assert(typeof action.scene === 'string', action);
@@ -34,7 +33,9 @@ namespace Action {
       assert(isObject(action.adds), action);
       if (action.adds.hasOwnProperty('items')) {
         assert(Array.isArray(action.adds.items), action);
-        action.adds.items.forEach((i: any) => assert(typeof i === 'string', action));
+        for (const item of action.adds.items) {
+          assert(typeof item === 'string', action);
+        }
       }
     }
 
@@ -42,7 +43,9 @@ namespace Action {
       assert(isObject(action.removes), action);
       if (action.removes.hasOwnProperty('items')) {
         assert(Array.isArray(action.removes.items), action);
-        action.removes.items.forEach((i: any) => assert(typeof i === 'string', action));
+        for (const item of action.removes.items) {
+          assert(typeof item === 'string', action);
+        }
       }
     }
 
@@ -50,7 +53,7 @@ namespace Action {
 
     return {
       ...action,
-      type: action.type || Action.Type.SCENE
+      type: action.type || 'scene'
     };
   };
 
@@ -83,9 +86,9 @@ namespace Action {
   export const sort = (actions: Action[]) => {
     const getPriority = (action: Action): number => {
       switch (action.type) {
-        case Action.Type.ACTION: return 2;
-        case Action.Type.ITEM:   return 1;
-        case Action.Type.SCENE:  return 0;
+        case 'action': return 2;
+        case 'item':   return 1;
+        case 'scene':  return 0;
       }
     };
 

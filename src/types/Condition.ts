@@ -21,11 +21,15 @@ namespace Condition {
       assert(isObject(condition.requires), condition);
       if (condition.requires.hasOwnProperty('items')) {
         assert(Array.isArray(condition.requires.items), condition);
-        condition.requires.items.forEach((i: any) => assert(typeof i === 'string', condition));
+        for (const item of condition.requires.items) {
+          assert(typeof item === 'string', condition);
+        }
       }
       if (condition.requires.hasOwnProperty('visited')) {
         assert(Array.isArray(condition.requires.visited), condition);
-        condition.requires.visited.forEach((v: any) => assert(typeof v === 'string', condition))
+        for (const sceneId of condition.requires.visited) {
+          assert(typeof sceneId === 'string', condition);
+        }
       }
       assert(!hasUnknownProperties(condition.requires, ['items', 'visited']), condition);
     }
@@ -34,11 +38,15 @@ namespace Condition {
       assert(isObject(condition.forbids), condition);
       if (condition.forbids.hasOwnProperty('items')) {
         assert(Array.isArray(condition.forbids.items), condition);
-        condition.forbids.items.forEach((i: any) => assert(typeof i === 'string', condition));
+        for (const item of condition.forbids.items) {
+          assert(typeof item === 'string', condition);
+        }
       }
       if (condition.forbids.hasOwnProperty('visited')) {
         assert(Array.isArray(condition.forbids.visited), condition);
-        condition.forbids.visited.forEach((v: any) => assert(typeof v === 'string', condition))
+        for (const sceneId of condition.forbids.visited) {
+          assert(typeof sceneId === 'string', condition);
+        }
       }
       assert(!hasUnknownProperties(condition.forbids, ['items', 'visited']), condition);
     }
@@ -49,7 +57,9 @@ namespace Condition {
 
     if (condition.hasOwnProperty('actions')) {
       assert(Array.isArray(condition.actions), condition);
-      condition.actions.forEach(Action.validate);
+      for (const action of condition.actions) {
+        Action.validate(action);
+      }
     }
 
     assert(!hasUnknownProperties(condition, ['requires', 'forbids', 'actions', 'description']), condition);
