@@ -83,12 +83,14 @@ const App = ({ scenes, definitions, initialState }: Props) => {
 
   return (
     <div className="app">
-      <Menu
-        title={scene.name}
-        description={description || ''}
-        actions={actionButtons}
-      />
-      {term && definition && (<Definition term={term} definition={definition} />)}
+      <div className="app-main">
+        <Menu
+          title={scene.name}
+          description={description || ''}
+          actions={actionButtons}
+        />
+        {term && definition && (<Definition term={term} definition={definition} />)}
+      </div>
       <Footer controller={controller} />
       {lightbox}
     </div>
