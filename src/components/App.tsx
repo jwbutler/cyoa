@@ -83,7 +83,7 @@ const App = ({ scenes, definitions, initialState }: Props) => {
 
   return (
     <div className="app">
-      <div className="app-main">
+      <div className="app-content">
         <Menu
           title={scene.name}
           description={description || ''}

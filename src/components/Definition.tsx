@@ -9,7 +9,9 @@ type Props = {
 
 const Definition = ({ term, definition }: Props) => (
   <div className="definition">
-    <UnsafeHTML>{parseMarkup(definition)}</UnsafeHTML>
+    <div className="definition-content">
+      <UnsafeHTML>{parseMarkup(definition)}</UnsafeHTML>
+    </div>
   </div>
 );
 
