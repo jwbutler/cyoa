@@ -9,7 +9,7 @@ import './index.css';
 
 const scenes = importScenes();
 const initialState: GameState = {
-  sceneId: 'intro',
+  sceneId: 'intro_1',
   inventory: [],
   visited: []
 };
