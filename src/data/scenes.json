@@ -166,9 +166,20 @@
     ]
   },
   {
-    "id": "intro",
+    "id": "intro_1",
     "name": "",
-    "description": "You are standing in front of a big Victorian style house. This is the address your friend Warren West gave you.<br/><br/>Warren is the most brilliant computer programmer you have ever met. You have known each other since college, and together you are the co-founders of Bionic Bridge Studios, a small independent game development company.<br/><br/>Two years ago you had a minor hit with a game called Dungeons of Duzh. You were both convinced that with a successful follow-up you would be able to quit your day jobs at Travel Tips Inc.<br/><br/>The early designs for the next game seemed promising, but Warren kept insisting on going back to the drawing board. For the last two years he was always on the verge of developing a groundbreaking new engine to generate more complex and immersive worlds than anyone had seen before. Unfortunately, despite putting a massive number of hours into his work, Warren was never satisfied, and progress on the game ground to a halt.<br/><br/>Last month, Warren was laid off. Strangely, just a few days after, Warren told you that he had inherited a house and a substantial sum of money from his great uncle. He moved out of his apartment and into the house, where he poured himself into the latest version of his game engine. Since then, he has communicated with you only occasionally, hinting that the breakthrough he was waiting for was at hand.<br/><br/>At 3 AM this morning you received a message from him, saying only:<br/><br/><b>it is done come see.</b>",
+    "description": "You are standing in front of a big Victorian style house. This is the address your friend [Warren West](warren-west) gave you.\n\nWarren is the most brilliant computer programmer you have ever met. You have known each other since college, and together you are the co-founders of [Bionic Bridge Studios](bionic-bridge), a small independent game development company.\n\nTwo years ago you had a minor hit with a game called [Dungeon of Duzh](dungeon-of-duzh). You were both convinced that with a successful follow-up you would be able to quit your day jobs at [Travel Tips Inc.](travel-tips)\n\nThe early designs for the [next game](new-game) seemed promising, but Warren kept insisting on going back to the drawing board. For the last two years he was always on the verge of developing a groundbreaking new engine to generate more complex and immersive worlds than anyone had seen before. Unfortunately, despite putting a massive number of hours into his work, Warren was never satisfied, and progress on the game ground to a halt.",
+    "actions": [
+      {
+        "text": "Continue",
+        "scene": "intro_2"
+      }
+    ]
+  },
+  {
+    "id": "intro_2",
+    "name": "",
+    "description": "Last month, Warren was laid off. Strangely, just a few days after, Warren told you that he had inherited a house and a substantial sum of money from his [great uncle](henry-west). He moved out of his apartment and into the house, where he poured himself into the latest version of his game engine. Since then, he has communicated with you only occasionally, hinting that the breakthrough he was waiting for was at hand.\n\nAt 3 AM this morning you received a message from him, saying only:\n\n<b>it is done come see.</b>",
     "actions": [
       {
         "text": "Continue",

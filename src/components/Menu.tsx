@@ -1,5 +1,5 @@
 import React, { createRef, ReactNode, RefObject, useEffect } from 'react';
-import './Menu.css';
+import styles from './Menu.module.css';
 import UnsafeHTML from './UnsafeHTML';
 
 type Props = {
@@ -21,12 +21,14 @@ const Menu = ({ title, description, actions }: Props) => {
   });
 
   return (
-    <div className="menu" ref={ref}>
-      <h1 className="menu-title">{title}</h1>
-      <p className="menu-description">
+    <div className={styles['menu']} ref={ref}>
+      {title && (
+        <h1 className={styles['menu-title']}>{title}</h1>
+      )}
+      <p className={styles['menu-description']}>
         <UnsafeHTML>{description}</UnsafeHTML>
       </p>
-      <div className="menu-actions">
+      <div className={styles['menu-actions']}>
         {actions}
       </div>
     </div>

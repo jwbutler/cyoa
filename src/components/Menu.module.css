@@ -1,10 +1,10 @@
 .menu {
   display: flex;
-  align-items: stretch;
+  align-items: center;
   flex-direction: column;
   margin: 0 auto;
-  max-width: 40rem;
   overflow: auto;
+  padding: 1rem 1rem;
 }
 
 .menu h1.menu-title {
@@ -12,17 +12,23 @@
   text-align: center;
 }
 
+@media (min-width: 768px) {
+  .menu {
+    max-width: 50%;
+  }
+}
+
 .menu-description {
   text-align: left;
+  margin: 0;
 }
 
 .menu-actions {
   display: flex;
   align-items: stretch;
   flex-direction: column;
-  width: 100%;
-  padding-left: 12.5%;
-  padding-right: 12.5%;
+  min-width: 50%;
+  max-width: 75%;
   margin-top: 1rem;
 }
 

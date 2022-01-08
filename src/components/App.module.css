@@ -1,0 +1,21 @@
+.app {
+  width: 100%;
+  height: calc(100% - 4rem);
+  overflow: hidden;
+}
+
+.app-content {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .app-content {
+    flex-direction: row;
+  }
+}

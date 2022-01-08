@@ -1,4 +1,5 @@
-import json from '../scenes.json';
+import json from '../data/scenes.json';
+import { parseMarkup } from '../utils/markup';
 
 import Action from './Action';
 import Condition from './Condition';
@@ -74,9 +75,11 @@ namespace Scene {
     }
 
     assert(!hasUnknownProperties(scene, ['id', 'name', 'description', 'actions', 'conditions']), scene);
+    console.log(scene.description);
 
     return {
       ...scene,
+      description: scene.description ? parseMarkup(scene.description) : undefined,
       actions,
       conditions
     };
