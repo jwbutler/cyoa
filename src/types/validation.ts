@@ -29,7 +29,7 @@ const validateSchema = (object: object, schemaFilename: string): Promise<boolean
  */
 const assert = (condition: boolean, obj: any): void => {
   if (!condition) {
-    throw new Error("Invalid definition: " + JSON.stringify(obj));
+    throw new Error(`Invalid definition: ${JSON.stringify(obj)}`);
   }
 };
 

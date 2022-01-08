@@ -79,7 +79,6 @@ const App = ({ scenes, definitions, initialState }: Props) => {
 
   const term = (location.hash && definitions[location.hash.substring(1)]) ? location.hash.substring(1) : null;
   const definition = (term) ? definitions[term] : null;
-  console.log(term);
 
   return (
     <div className={styles['app']}>
