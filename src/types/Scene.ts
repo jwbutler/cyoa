@@ -1,4 +1,3 @@
-import json from '../data/scenes.json';
 import { parseMarkup } from '../utils/markup';
 
 import Action from './Action';
@@ -13,11 +12,11 @@ type Scene = {
   readonly conditions?: ReadonlyArray<Condition>
 }
 
-const importScenes: () => Scene[] = () => {
+const importScenes = async (ids: string[]): Promise<Scene[]> => {
   const scenesById: Record<string, Scene> = {};
-  for (const obj of json) {
-    const scene = Scene.validate(obj);
-    const { id } = scene;
+  for (const id of ids) {
+    const json = (await import(`../data/scenes/${id}.json`)).default;
+    const scene = Scene.validate(json);
     scenesById[id] = scene;
   }
   validateReferences(scenesById);
@@ -75,7 +74,6 @@ namespace Scene {
     }
 
     assert(!hasUnknownProperties(scene, ['id', 'name', 'description', 'actions', 'conditions']), scene);
-    console.log(scene.description);
 
     return {
       ...scene,
