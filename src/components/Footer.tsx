@@ -3,7 +3,7 @@ import Button from './Button';
 import Controller from '../types/Controller';
 import Lightbox from './Lightbox';
 import GameState from '../types/GameState';
-import './Footer.css';
+import styles from './Footer.module.css';
 
 type Props = {
   controller: Controller
@@ -109,7 +109,7 @@ const Footer = ({ controller }: Props) => {
   };
 
   return (
-    <div className="footer">
+    <div className={styles['footer']}>
       <Button
         type="white"
         size="small"
@@ -134,6 +134,6 @@ const Footer = ({ controller }: Props) => {
       </Button>
     </div>
   );
-}
+};
 
 export default Footer;

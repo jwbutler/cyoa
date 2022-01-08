@@ -30,8 +30,9 @@
       "react-app/jest"
     ],
     "rules": {
+      "@typescript-eslint/no-redeclare": "off",
       "no-restricted-globals": "off",
-      "@typescript-eslint/no-redeclare": "off"
+      "no-useless-escape": "off"
     }
   },
   "browserslist": {

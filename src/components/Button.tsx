@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import './Button.css';
+import styles from './Button.module.css';
 
 type ButtonType = 'white' | 'white_blue' | 'blue';
 type ButtonSize = 'medium' | 'small';
@@ -23,7 +23,7 @@ const Button = ({
   children,
   ...rest
 }: Props) => {
-  const className = ['button', type, size].join(' ');
+  const className = [styles['button'], styles[type], styles[size]].join(' ');
   return (
     <button
       className={className}

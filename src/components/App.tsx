@@ -9,7 +9,7 @@ import Footer from './Footer';
 import Menu from './Menu';
 import GameState from '../types/GameState';
 import Scene from '../types/Scene';
-import './App.css';
+import styles from './App.module.css';
 import { load as loadSavedGame } from '../saveFile';
 
 type Props = {
@@ -82,8 +82,8 @@ const App = ({ scenes, definitions, initialState }: Props) => {
   console.log(term);
 
   return (
-    <div className="app">
-      <div className="app-content">
+    <div className={styles['app']}>
+      <div className={styles['app-content']}>
         <Menu
           title={scene.name}
           description={description || ''}
