@@ -8,8 +8,11 @@ type Props = {
 }
 
 const Definition = ({ term, definition }: Props) => (
-  <div className={styles['definition']}>
-    <div className={styles['definition-content']}>
+  <div className={styles.definition}>
+    <a className={styles.x} href="#">
+      ×
+    </a>
+    <div className={styles.content}>
       <UnsafeHTML>{parseMarkup(definition)}</UnsafeHTML>
     </div>
   </div>

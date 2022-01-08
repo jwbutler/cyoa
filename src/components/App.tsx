@@ -89,7 +89,12 @@ const App = ({ scenes, definitions, initialState }: Props) => {
           description={description || ''}
           actions={actionButtons}
         />
-        {term && definition && (<Definition term={term} definition={definition} />)}
+        {term && definition && (
+          <Definition
+            term={term}
+            definition={definition}
+          />
+        )}
       </div>
       <Footer controller={controller} />
       {lightbox}
